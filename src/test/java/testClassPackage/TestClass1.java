@@ -18,6 +18,7 @@ import pageObjectsPackage.ListExpensesPage;
 import pageObjectsPackage.LoginPage;
 import pageObjectsPackage.EditUserAccount;
 import java.util.concurrent.TimeUnit;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class TestClass1 {
@@ -28,8 +29,10 @@ public class TestClass1 {
 	@BeforeClass
 	public void SetUp() {
 		baseUrl = "http://thawing-shelf-73260.herokuapp.com/";
-		System.setProperty("webdriver.gecko.driver", "/C:/Users/revanth.sreekumar/Downloads/geckodriver.exe");
-		driver = new FirefoxDriver();
+		//System.setProperty("webdriver.gecko.driver", "/C:/Users/revanth.sreekumar/Downloads/geckodriver.exe");
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		//driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(baseUrl);
