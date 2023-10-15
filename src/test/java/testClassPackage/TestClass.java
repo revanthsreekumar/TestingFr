@@ -19,6 +19,9 @@ import pageObjectsPackage.NewUserRegistrationPage;
 import java.util.concurrent.TimeUnit;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+	public static EventFiringWebDriver e_driver;
+	public static WebEventListener eventListener;
+
 public class TestClass {
 	public static WebElement element = null;
 	String baseUrl;
@@ -31,6 +34,10 @@ public class TestClass {
 		//System.setProperty("webdriver.gecko.driver", "/C:/Users/revanth.sreekumar/Downloads/geckodriver.exe");
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
+			e_driver = new EventFiringWebDriver(driver);
+		eventListener = new WebEventListener();
+		e_driver.register(eventListener);
+		driver = e_driver;
 		//driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
